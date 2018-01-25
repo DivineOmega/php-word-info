@@ -27,4 +27,44 @@ final class WordTest extends TestCase
         $this->assertEquals($expected, $rhymes);
     }
 
+    public function testSyllables1()
+    {
+        $syllables = (new Word('hi'))->syllables();
+        $expected = 1;
+
+        $this->assertEquals($expected, $syllables);
+    }
+
+    public function testSyllables2()
+    {
+        $syllables = (new Word('hello'))->syllables();
+        $expected = 2;
+
+        $this->assertEquals($expected, $syllables);
+    }
+
+    public function testSyllables3()
+    {
+        $syllables = (new Word('happiness'))->syllables();
+        $expected = 3;
+
+        $this->assertEquals($expected, $syllables);
+    }
+
+    public function testOffensive()
+    {
+        $offensive = (new Word('fuck'))->offensive();
+        $expected = true;
+
+        $this->assertEquals($expected, $offensive);
+    }
+
+    public function testNotOffensive()
+    {
+        $offensive = (new Word('cake'))->offensive();
+        $expected = false;
+
+        $this->assertEquals($expected, $offensive);
+    }
+
 }
