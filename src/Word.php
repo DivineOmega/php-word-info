@@ -70,7 +70,7 @@ class Word {
         return $this->rhymes(true);
     }
 
-    private function WordInfo()
+    private function wordInfo()
     {
         $cacheKey = $this->word.'.info';
 
