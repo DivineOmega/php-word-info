@@ -2,8 +2,7 @@
 namespace DivineOmega\WordInfo;
 
 use rapidweb\RWFileCache\RWFileCache;
-use Illuminate\Support\Str;
-
+use Snipe\BanBuilder\CensorWords;
 
 class Word {
 
@@ -95,7 +94,10 @@ class Word {
 
     public function offensive()
     {
-        return Str::contains($this->wordInfo()->flags, 'a');
+        $censor = new CensorWords;
+        $censor->setDictionary(['en-uk', 'en-us']);
+        $result = $censor->censorString($this->word);
+        return count($result['matched'])>0;
     }
 
 }
