@@ -115,10 +115,6 @@ class Word {
 
         $portmanteaus = [];
 
-        usort($responseItems, function($a, $b) {
-            return $a->combined > $b->combined ? 1 : -1;
-        });
-
         foreach($responseItems as $responseItem) {
             $responseItemPortmanteaus = array_map(function($portmanteauString) {
                 return new Word($portmanteauString);
@@ -126,6 +122,8 @@ class Word {
             
             $portmanteaus = array_merge($portmanteaus, $responseItemPortmanteaus);
         }
+
+        sort($portmanteaus);
 
         $this->cache->set($cacheKey, $portmanteaus);
 
