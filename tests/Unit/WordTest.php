@@ -127,4 +127,14 @@ final class WordTest extends TestCase
         $this->assertEquals($expected, $portmanteaus);
     }
 
+    public function cacheTest()
+    {
+        $this->testRhymes();
+        $this->testRhymes();
+        $this->testSyllables1();
+        $this->testSyllables1();
+        $this->testPortmanteaus1();
+        $this->testPortmanteaus1();
+    }
+
 }
