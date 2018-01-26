@@ -94,24 +94,20 @@ final class WordTest extends TestCase
     public function testPortmanteaus1()
     {
         $portmanteaus = (new Word('computer'))->portmanteaus();
-        
-        $expected = ['computerena', 'computarena', 'computeriginal', 'computoriginal', 'computeriginality', 
-                    'computoriginality', 'computeriginally', 'computoriginally', 'computeriginals', 'computoriginals', 
-                    'computeriginate', 'computoriginate', 'computeriginated', 'computoriginated', 'computeriginates', 
-                    'computoriginates', 'computeriginating', 'computoriginating', 'computerine', 'computerise', 
-                    'computarise', 'computerisen', 'computarisen', 'computerises', 'computarises', 'computerising',
-                    'computarising', 'computeristocratic', 'computaristocratic', 'computermination', 'computeroma', 
-                    'computaroma', 'computerose', 'computarose', 'computeround', 'computaround', 'computerousal', 
-                    'computarousal', 'computerouse', 'computarouse', 'computeroused', 'computaroused', 'computerousing', 
-                    'computarousing', 'computerrain', 'computerrestrial', 'computerrific', 'computerrrange', 
-                    'computarrange', 'computerrranged', 'computarranged', 'computerrrangement', 'computarrangement', 
-                    'computerrrangements', 'computarrangements', 'computerrranging', 'computarranging', 'computerrray', 
-                    'computarray', 'computerrrears', 'computarrears', 'computerrrest', 'computarrest', 'computerrrested', 
-                    'computarrested', 'computerrresting', 'computarresting','computerrrests', 'computarrests', 
-                    'computerrrhythmias', 'computarrhythmias', 'computerrrival', 'computarrival', 'computerrrivals', 
-                    'computarrivals', 'computerrrive', 'computarrive', 'computerrrived', 'computarrived', 
-                    'computerrrives', 'computarrives', 'computerrriving', 'computarriving', 'computerus', 
-                    'computeryrannical', 'computyrannical', 'incomputer', 'outcomputer', 'silicaomputer', 
+
+        $expected = ['computarena', 'computarise', 'computarisen', 'computarises', 'computarising', 'computaristocratic', 'computaroma', 
+                    'computarose', 'computaround', 'computarousal', 'computarouse', 'computaroused', 'computarousing', 'computarrange', 
+                    'computarranged', 'computarrangement', 'computarrangements', 'computarranging', 'computarray', 'computarrears', 'computarrest',
+                    'computarrested', 'computarresting', 'computarrests', 'computarrhythmias', 'computarrival', 'computarrivals', 'computarrive', 
+                    'computarrived', 'computarrives', 'computarriving', 'computerena', 'computeriginal', 'computeriginality', 'computeriginally', 
+                    'computeriginals', 'computeriginate', 'computeriginated', 'computeriginates', 'computeriginating', 'computerine', 'computerise', 
+                    'computerisen', 'computerises', 'computerising', 'computeristocratic', 'computermination', 'computeroma', 'computerose', 
+                    'computeround', 'computerousal', 'computerouse', 'computeroused', 'computerousing', 'computerrain', 'computerrestrial', 
+                    'computerrific', 'computerrrange', 'computerrranged', 'computerrrangement', 'computerrrangements', 'computerrranging', 
+                    'computerrray', 'computerrrears', 'computerrrest', 'computerrrested', 'computerrresting', 'computerrrests', 'computerrrhythmias', 
+                    'computerrrival', 'computerrrivals', 'computerrrive', 'computerrrived', 'computerrrives', 'computerrriving', 'computerus', 
+                    'computeryrannical', 'computoriginal', 'computoriginality', 'computoriginally', 'computoriginals', 'computoriginate', 
+                    'computoriginated', 'computoriginates', 'computoriginating', 'computyrannical', 'incomputer', 'outcomputer', 'silicaomputer', 
                     'silicomputer', 'welcomputer'];
 
         $this->assertEquals($expected, $portmanteaus);
@@ -121,8 +117,8 @@ final class WordTest extends TestCase
     {
         $portmanteaus = (new Word('cheese'))->portmanteaus();
 
-        $expected = ['chease','cheased','cheasel','cheasement','cheasements','cheases','cheasier','cheasiest','cheasily',
-                    'cheasing','cheasy','cheasygoing','chies','chiheese','chiis','chization','chys'];
+        $expected = ['chease', 'cheased', 'cheasel', 'cheasement', 'cheasements', 'cheases', 'cheasier', 'cheasiest', 'cheasily', 'cheasing', 
+                    'cheasy', 'cheasygoing', 'chies', 'chiheese', 'chiis', 'chization', 'chys'];
 
         $this->assertEquals($expected, $portmanteaus);
     }
