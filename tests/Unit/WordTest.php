@@ -129,12 +129,14 @@ final class WordTest extends TestCase
 
     public function cacheTest()
     {
-        $this->testRhymes();
-        $this->testRhymes();
-        $this->testSyllables1();
-        $this->testSyllables1();
-        $this->testPortmanteaus1();
-        $this->testPortmanteaus1();
+        $rhymes = (new Word('cat'))->rhymes();
+        $rhymes = (new Word('cat'))->rhymes();
+
+        $expected = ['aristocrat', 'at', 'bat', 'caveat', 'chat', 'democrat', 'diplomat', 
+                    'fat', 'flat', 'habitat', 'hat', 'mat', 'pat', 'rat', 'sat', 'spat', 
+                    'stat', 'tat', 'that', 'thermostat', 'vat'];
+
+        $this->assertEquals($expected, $rhymes);
     }
 
 }
