@@ -102,7 +102,7 @@ class Word {
 
     public function portmanteaus()
     {
-        $cacheKey = $this->word.'.portmanteauCollections';
+        $cacheKey = $this->word.'.portmanteaus';
 
         $value = $this->cache->get($cacheKey);
 
