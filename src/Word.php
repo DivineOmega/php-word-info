@@ -100,4 +100,40 @@ class Word {
         return count($result['matched'])>0;
     }
 
+    public function portmanteaus()
+    {
+        $cacheKey = $this->word.'.portmanteauCollections';
+
+        $value = $this->cache->get($cacheKey);
+
+        if ($value) {
+            return $value;
+        }
+
+        $response = file_get_contents('http://rhymebrain.com/talk?function=getPortmanteaus&word='.urlencode($this->word));
+        $responseItems = json_decode($response);
+
+        $portmanteaus = [];
+
+        usort($responseItems, function($a, $b) {
+            if ($a->combined == $b->combined) {
+                return 0;
+            }
+
+            return $a->combined > $b->combined ? 1 : -1;
+        });
+
+        foreach($responseItems as $responseItem) {
+            $responseItemPortmanteaus = array_map(function($portmanteauString) {
+                return new Word($portmanteauString);
+            }, explode(',', $responseItem->combined));
+            
+            $portmanteaus = array_merge($portmanteaus, $responseItemPortmanteaus);
+        }
+
+        $this->cache->set($cacheKey, $portmanteaus);
+
+        return $portmanteaus;
+    }
+
 }
