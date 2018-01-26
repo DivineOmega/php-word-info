@@ -116,10 +116,6 @@ class Word {
         $portmanteaus = [];
 
         usort($responseItems, function($a, $b) {
-            if ($a->combined == $b->combined) {
-                return 0;
-            }
-
             return $a->combined > $b->combined ? 1 : -1;
         });
 
