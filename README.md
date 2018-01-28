@@ -23,7 +23,7 @@ If you have never used the Composer dependency manager before, head to the [Comp
 
 ## Usage
 
-To use PHP Word Info, you must first create a new `Word` object. You can then call any method of the `Word` object methods, as shown below.
+To use PHP Word Info, you must first create a new `Word` object. You can then call any of the `Word` object methods, as shown below.
 
 ```php
 $word = new Word('cat');
