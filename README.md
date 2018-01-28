@@ -16,7 +16,7 @@ This PHP library can be used to look up information about a word, including the 
 PHP Word Info can be easily installed using Composer. Just run the following command from the root of your project.
 
 ```
-composer require rapidwebltd/uxdm
+composer require divineomega/php-word-info
 ```
 
 If you have never used the Composer dependency manager before, head to the [Composer website](https://getcomposer.org/) for more information on how to get started.
