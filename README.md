@@ -30,7 +30,7 @@ $word = new Word('cat');
 
 $rhymes = $word->rhymes();
 $halfRhymes = $word->halfRhymes();
-$numberOfSyllables = $word->syllables();
+$numberOfSyllables = $word->syllables(); // Returns an integer
 $isOffensive = $word->offensive(); // Returns true/false
 $portmanteaus = $word->portmanteaus();
 ```
