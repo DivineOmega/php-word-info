@@ -94,10 +94,7 @@ class Word {
 
     public function offensive()
     {
-        $censor = new CensorWords;
-        $censor->setDictionary(['en-uk', 'en-us']);
-        $result = $censor->censorString($this->word);
-        return count($result['matched'])>0;
+        return is_offensive($this->word);
     }
 
     public function portmanteaus()
