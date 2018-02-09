@@ -3,6 +3,7 @@ namespace DivineOmega\WordInfo;
 
 use rapidweb\RWFileCache\RWFileCache;
 use Snipe\BanBuilder\CensorWords;
+use DaveChild\TextStatistics\Syllables;
 
 class Word {
 
@@ -89,7 +90,7 @@ class Word {
 
     public function syllables()
     {
-        return $this->wordInfo()->syllables;
+        return Syllables::syllableCount($this->word);
     }
 
     public function offensive()
