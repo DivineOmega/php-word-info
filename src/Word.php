@@ -70,24 +70,6 @@ class Word {
         return $this->rhymes(true);
     }
 
-    private function wordInfo()
-    {
-        $cacheKey = $this->word.'.info';
-
-        $value = $this->cache->get($cacheKey);
-
-        if ($value) {
-            return $value;
-        }
-
-        $response = file_get_contents('http://rhymebrain.com/talk?function=getWordInfo&word='.urlencode($this->word));
-        $wordInfo = json_decode($response);
-
-        $this->cache->set($cacheKey, $wordInfo);
-
-        return $wordInfo;
-    }
-
     public function syllables()
     {
         return Syllables::syllableCount($this->word);
