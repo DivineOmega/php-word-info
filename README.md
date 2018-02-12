@@ -30,9 +30,11 @@ $word = new Word('cat');
 
 $rhymes = $word->rhymes();
 $halfRhymes = $word->halfRhymes();
-$numberOfSyllables = $word->syllables(); // Returns an integer
-$isOffensive = $word->offensive(); // Returns true/false
 $portmanteaus = $word->portmanteaus();
+$numberOfSyllables = $word->syllables();    // Returns an integer
+$isOffensive = $word->offensive();          // Returns true/false
+$plural = $word->plural();                  // Returns `Word` object
+$singular = $word->singular;                // Returns `Word` object
 ```
 
 Most methods will return an array of `Word` objects, unless specified otherwise.
