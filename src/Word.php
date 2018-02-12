@@ -75,6 +75,16 @@ class Word {
         return Syllables::syllableCount($this->word);
     }
 
+    public function plural()
+    {
+        return (new Pluralizer($this->word))->pluralize();
+    }
+
+    public function singular()
+    {
+        return (new Pluralizer($this->word))->singularize();
+    }
+
     public function offensive()
     {
         return is_offensive($this->word);
