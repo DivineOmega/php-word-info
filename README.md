@@ -10,6 +10,7 @@ This PHP library can be used to look up information about a word, including the 
 * Number of syllables
 * Offensive or not
 * Portmanteaus
+* Plural / singular
 
 ## Installation
 
