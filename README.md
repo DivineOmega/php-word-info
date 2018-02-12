@@ -31,6 +31,7 @@ $word = new Word('cat');
 $rhymes = $word->rhymes();
 $halfRhymes = $word->halfRhymes();
 $portmanteaus = $word->portmanteaus();
+
 $numberOfSyllables = $word->syllables();    // Returns an integer
 $isOffensive = $word->offensive();          // Returns true/false
 $plural = $word->plural();                  // Returns `Word` object
