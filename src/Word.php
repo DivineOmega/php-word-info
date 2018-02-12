@@ -77,12 +77,12 @@ class Word {
 
     public function plural()
     {
-        return (new Pluralizer($this->word))->pluralize();
+        return (new Pluralizer($this))->pluralize();
     }
 
     public function singular()
     {
-        return (new Pluralizer($this->word))->singularize();
+        return (new Pluralizer($this))->singularize();
     }
 
     public function offensive()

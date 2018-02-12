@@ -19,7 +19,7 @@ class Pluralizer
 
     private $word;
 
-    public function __construct(string $word)
+    public function __construct(Word $word)
     {
         $this->word = $word;
     }
@@ -27,31 +27,35 @@ class Pluralizer
     public function pluralize()
     {
         if ($this->isUncountable()) {
-            return $this->word;
+            return new Word($this->word);
         }
 
         foreach($this->irregular as $singular => $plural) {
             if ($singular==$this->word) {
-                return $plural;
+                return new Word($plural);
             }
         }
 
-        return Inflector::pluralize($this->word);
+        $plural = Inflector::pluralize((string) $this->word);
+
+        return new Word($plural);
     }
 
     public function singularize()
     {
         if ($this->isUncountable()) {
-            return $this->word;
+            return new Word($this->word);
         }
 
         foreach($this->irregular as $singular => $plural) {
             if ($plural==$this->word) {
-                return $singular;
+                return new Word($singular);
             }
         }        
 
-        return Inflector::singularize($this->word);
+        $singular = Inflector::singularize((string) $this->word);
+
+        return new Word($singular);
     }
 
     private function isUncountable()
