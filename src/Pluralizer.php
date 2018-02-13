@@ -1,4 +1,5 @@
 <?php
+
 namespace DivineOmega\WordInfo;
 
 use Doctrine\Common\Inflector\Inflector;
@@ -14,7 +15,7 @@ class Pluralizer
         'education',
         'love',
         'pokemon',
-        'mathematics'
+        'mathematics',
     ];
 
     private $word;
@@ -30,8 +31,8 @@ class Pluralizer
             return new Word($this->word);
         }
 
-        foreach($this->irregular as $singular => $plural) {
-            if ($singular==$this->word) {
+        foreach ($this->irregular as $singular => $plural) {
+            if ($singular == $this->word) {
                 return new Word($plural);
             }
         }
@@ -47,11 +48,11 @@ class Pluralizer
             return new Word($this->word);
         }
 
-        foreach($this->irregular as $singular => $plural) {
-            if ($plural==$this->word) {
+        foreach ($this->irregular as $singular => $plural) {
+            if ($plural == $this->word) {
                 return new Word($singular);
             }
-        }        
+        }
 
         $singular = Inflector::singularize((string) $this->word);
 
@@ -60,6 +61,6 @@ class Pluralizer
 
     private function isUncountable()
     {
-        return (in_array($this->word, $this->uncountable));
+        return in_array($this->word, $this->uncountable);
     }
 }

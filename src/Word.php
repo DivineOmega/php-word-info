@@ -1,12 +1,12 @@
 <?php
+
 namespace DivineOmega\WordInfo;
 
-use rapidweb\RWFileCache\RWFileCache;
-use Snipe\BanBuilder\CensorWords;
 use DaveChild\TextStatistics\Syllables;
+use rapidweb\RWFileCache\RWFileCache;
 
-class Word {
-
+class Word
+{
     private $word;
     private $cache;
 
@@ -23,7 +23,7 @@ class Word {
 
     private function setupCache()
     {
-        $this->cache = new RWFileCache;
+        $this->cache = new RWFileCache();
         $this->cache->changeConfig(['cacheDirectory' => '/tmp/php-word-info-cache/']);
     }
 
@@ -46,22 +46,22 @@ class Word {
 
         $rhymes = [];
 
-        foreach($responseItems as $responseItem) {
+        foreach ($responseItems as $responseItem) {
             if ($halfRhymes) {
                 if ($responseItem->score < 300) {
-                    $rhymes[] = new Word($responseItem->word);
+                    $rhymes[] = new self($responseItem->word);
                 }
             } else {
-              if($responseItem->score == 300) {
-                $rhymes[] = new Word($responseItem->word);
-              }
+                if ($responseItem->score == 300) {
+                    $rhymes[] = new self($responseItem->word);
+                }
             }
         }
 
         sort($rhymes);
 
         $this->cache->set($cacheKey, $rhymes);
-        
+
         return $rhymes;
     }
 
@@ -105,11 +105,11 @@ class Word {
 
         $portmanteaus = [];
 
-        foreach($responseItems as $responseItem) {
-            $responseItemPortmanteaus = array_map(function($portmanteauString) {
+        foreach ($responseItems as $responseItem) {
+            $responseItemPortmanteaus = array_map(function ($portmanteauString) {
                 return new Word($portmanteauString);
             }, explode(',', $responseItem->combined));
-            
+
             $portmanteaus = array_merge($portmanteaus, $responseItemPortmanteaus);
         }
 
@@ -119,5 +119,4 @@ class Word {
 
         return $portmanteaus;
     }
-
 }
