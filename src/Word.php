@@ -1,11 +1,12 @@
 <?php
+
 namespace DivineOmega\WordInfo;
 
+use DaveChild\TextStatistics\Syllables;
 use rapidweb\RWFileCache\RWFileCache;
-use Snipe\BanBuilder\CensorWords;
 
-class Word {
-
+class Word
+{
     private $word;
     private $cache;
 
@@ -22,7 +23,7 @@ class Word {
 
     private function setupCache()
     {
-        $this->cache = new RWFileCache;
+        $this->cache = new RWFileCache();
         $this->cache->changeConfig(['cacheDirectory' => '/tmp/php-word-info-cache/']);
     }
 
@@ -45,22 +46,22 @@ class Word {
 
         $rhymes = [];
 
-        foreach($responseItems as $responseItem) {
+        foreach ($responseItems as $responseItem) {
             if ($halfRhymes) {
                 if ($responseItem->score < 300) {
-                    $rhymes[] = new Word($responseItem->word);
+                    $rhymes[] = new self($responseItem->word);
                 }
             } else {
-              if($responseItem->score == 300) {
-                $rhymes[] = new Word($responseItem->word);
-              }
+                if ($responseItem->score == 300) {
+                    $rhymes[] = new self($responseItem->word);
+                }
             }
         }
 
         sort($rhymes);
 
         $this->cache->set($cacheKey, $rhymes);
-        
+
         return $rhymes;
     }
 
@@ -69,35 +70,24 @@ class Word {
         return $this->rhymes(true);
     }
 
-    private function wordInfo()
-    {
-        $cacheKey = $this->word.'.info';
-
-        $value = $this->cache->get($cacheKey);
-
-        if ($value) {
-            return $value;
-        }
-
-        $response = file_get_contents('http://rhymebrain.com/talk?function=getWordInfo&word='.urlencode($this->word));
-        $wordInfo = json_decode($response);
-
-        $this->cache->set($cacheKey, $wordInfo);
-
-        return $wordInfo;
-    }
-
     public function syllables()
     {
-        return $this->wordInfo()->syllables;
+        return Syllables::syllableCount($this->word);
+    }
+
+    public function plural()
+    {
+        return (new Pluralizer($this))->pluralize();
+    }
+
+    public function singular()
+    {
+        return (new Pluralizer($this))->singularize();
     }
 
     public function offensive()
     {
-        $censor = new CensorWords;
-        $censor->setDictionary(['en-uk', 'en-us']);
-        $result = $censor->censorString($this->word);
-        return count($result['matched'])>0;
+        return is_offensive($this->word);
     }
 
     public function portmanteaus()
@@ -115,11 +105,11 @@ class Word {
 
         $portmanteaus = [];
 
-        foreach($responseItems as $responseItem) {
-            $responseItemPortmanteaus = array_map(function($portmanteauString) {
+        foreach ($responseItems as $responseItem) {
+            $responseItemPortmanteaus = array_map(function ($portmanteauString) {
                 return new Word($portmanteauString);
             }, explode(',', $responseItem->combined));
-            
+
             $portmanteaus = array_merge($portmanteaus, $responseItemPortmanteaus);
         }
 
@@ -129,5 +119,4 @@ class Word {
 
         return $portmanteaus;
     }
-
 }
