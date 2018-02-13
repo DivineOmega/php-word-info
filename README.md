@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/DivineOmega/php-word-info.svg?branch=master)](https://travis-ci.org/DivineOmega/php-word-info)
 [![Coverage Status](https://coveralls.io/repos/github/DivineOmega/php-word-info/badge.svg?branch=master)](https://coveralls.io/github/DivineOmega/php-word-info?branch=master)
+[![StyleCI](https://styleci.io/repos/118921741/shield?branch=master)](https://styleci.io/repos/118921741)
 
 This PHP library can be used to look up information about a word, including the following.
 
