@@ -123,48 +123,48 @@ final class WordTest extends TestCase
         $this->assertEquals($expected, $portmanteaus);
     }
 
-    private function getSingularToPluralData()
+    public function pluraliseProvider()
     {
         return [
-            'cat'         => 'cats',
-            'mitten'      => 'mittens',
-            'sausage'     => 'sausages',
-            'child'       => 'children',
-            'goose'       => 'geese',
-            'person'      => 'people',
-            'woman'       => 'women',
-            'man'         => 'men',
-            'audio'       => 'audio',
-            'education'   => 'education',
-            'rice'        => 'rice',
-            'love'        => 'love',
-            'pokemon'     => 'pokemon',
-            'sheep'       => 'sheep',
-            'sex'         => 'sexes',
-            'mouse'       => 'mice',
-            'mathematics' => 'mathematics',
-            'information' => 'information',
-            'tooth'       => 'teeth',
+            ['cat', 'cats'],
+            ['mitten', 'mittens'],
+            ['sausage', 'sausages'],
+            ['child', 'children'],
+            ['goose', 'geese'],
+            ['person', 'people'],
+            ['woman', 'women'],
+            ['man', 'men'],
+            ['audio', 'audio'],
+            ['education', 'education'],
+            ['rice', 'rice'],
+            ['love', 'love'],
+            ['pokemon', 'pokemon'],
+            ['sheep', 'sheep'],
+            ['sex', 'sexes'],
+            ['mouse', 'mice'],
+            ['mathematics', 'mathematics'],
+            ['information', 'information'],
+            ['tooth', 'teeth'],
         ];
     }
 
-    public function testPluralise()
+    /**
+     * @dataProvider pluraliseProvider
+     */
+    public function testPluralise($singular, $plural)
     {
-        $data = $this->getSingularToPluralData();
+        $word = new Word($singular);
 
-        foreach ($data as $singular => $plural) {
-            $word = new Word($singular);
-            $this->assertEquals($plural, $word->plural());
-        }
+        $this->assertEquals($plural, $word->plural());
     }
 
-    public function testSingularise()
+    /**
+     * @dataProvider pluraliseProvider
+     */
+    public function testSingularise($singular, $plural)
     {
-        $data = $this->getSingularToPluralData();
+        $word = new Word($plural);
 
-        foreach ($data as $singular => $plural) {
-            $word = new Word($plural);
-            $this->assertEquals($singular, $word->singular());
-        }
+        $this->assertEquals($singular, $word->singular());
     }
 }
