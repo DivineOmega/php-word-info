@@ -7,27 +7,54 @@ use rapidweb\RWFileCache\RWFileCache;
 
 class Word
 {
+    /** @var string|null */
     private $word;
+
+    /** @var RWFileCache|null */
     private $cache;
 
+    /**
+     * Constructor.
+     *
+     * @param string $word
+     *
+     * @return void
+     */
     public function __construct(string $word)
     {
         $this->word = $word;
         $this->setupCache();
     }
 
+    /**
+     * Convert class instance to string.
+     *
+     * @return string
+     */
     public function __toString()
     {
         return $this->word;
     }
 
+    /**
+     * Set up cache.
+     *
+     * @return void
+     */
     private function setupCache()
     {
         $this->cache = new RWFileCache();
         $this->cache->changeConfig(['cacheDirectory' => '/tmp/php-word-info-cache/']);
     }
 
-    public function rhymes($halfRhymes = false)
+    /**
+     * Add the rhyme in word.
+     *
+     * @param bool $halfRhymes
+     *
+     * @return mixed
+     */
+    public function rhymes(bool $halfRhymes = false)
     {
         $cacheKey = $this->word.'.rhymes';
 
@@ -65,31 +92,61 @@ class Word
         return $rhymes;
     }
 
+    /**
+     * Let word be half rhymes.
+     *
+     * @return mixed
+     */
     public function halfRhymes()
     {
         return $this->rhymes(true);
     }
 
+    /**
+     * Syllables word.
+     *
+     * @return int
+     */
     public function syllables()
     {
         return Syllables::syllableCount($this->word);
     }
 
+    /**
+     * Plural word.
+     *
+     * @return string
+     */
     public function plural()
     {
         return (new Pluralizer($this))->pluralize();
     }
 
+    /**
+     * Singular word.
+     *
+     * @return string
+     */
     public function singular()
     {
         return (new Pluralizer($this))->singularize();
     }
 
+    /**
+     * Check the word is offensive.
+     *
+     * @return bool
+     */
     public function offensive()
     {
         return is_offensive($this->word);
     }
 
+    /**
+     * Portmanteaus word.
+     *
+     * @return mixed
+     */
     public function portmanteaus()
     {
         $cacheKey = $this->word.'.portmanteaus';

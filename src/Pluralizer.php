@@ -6,10 +6,12 @@ use Doctrine\Common\Inflector\Inflector;
 
 class Pluralizer
 {
+    /** @var array */
     private $irregular = [
         'goose' => 'geese',
     ];
 
+    /** @var array */
     private $uncountable = [
         'audio',
         'education',
@@ -18,13 +20,26 @@ class Pluralizer
         'mathematics',
     ];
 
+    /** @var Word|null */
     private $word;
 
+    /**
+     * Constructor.
+     *
+     * @param Word $word
+     *
+     * @return void
+     */
     public function __construct(Word $word)
     {
         $this->word = $word;
     }
 
+    /**
+     * Pluralize words.
+     *
+     * @return Word
+     */
     public function pluralize()
     {
         if ($this->isUncountable()) {
@@ -42,6 +57,11 @@ class Pluralizer
         return new Word($plural);
     }
 
+    /**
+     * Singularize the word.
+     *
+     * @return Word
+     */
     public function singularize()
     {
         if ($this->isUncountable()) {
@@ -59,6 +79,11 @@ class Pluralizer
         return new Word($singular);
     }
 
+    /**
+     * Check the word is uncountable.
+     *
+     * @return bool
+     */
     private function isUncountable()
     {
         return in_array($this->word, $this->uncountable);
