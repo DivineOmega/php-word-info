@@ -36,7 +36,7 @@ class Pluralizer
     }
 
     /**
-     * Pluralize words.
+     * Pluralize the word.
      *
      * @return Word
      */
@@ -80,7 +80,7 @@ class Pluralizer
     }
 
     /**
-     * Check the word is uncountable.
+     * Check the word is uncountable, meaning there is no spelling difference between the plural and singular versions of the word.
      *
      * @return bool
      */
