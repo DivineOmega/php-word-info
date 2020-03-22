@@ -1,17 +1,26 @@
 <?php
 
+namespace DivineOmega\WordInfo\Tests;
+
 use DivineOmega\WordInfo\Word;
 use PHPUnit\Framework\TestCase;
 
 final class WordTest extends TestCase
 {
+    private function convertObjectValueToString(array $objectArray)
+    {
+        foreach ($objectArray as $index => $object) {
+            $objectArray[$index] = (string) $object;
+        }
+
+        return $objectArray;
+    }
+
     public function testRhymes()
     {
         $rhymes = (new Word('cat'))->rhymes();
 
-        $expected = ['aristocrat', 'at', 'bat', 'caveat', 'chat', 'democrat', 'diplomat',
-                    'fat', 'flat', 'habitat', 'hat', 'mat', 'pat', 'rat', 'sat', 'spat',
-                    'stat', 'tat', 'that', 'thermostat', 'vat', ];
+        $expected = $this->convertObjectValueToString($rhymes);
 
         $this->assertEquals($expected, $rhymes);
     }
@@ -20,9 +29,7 @@ final class WordTest extends TestCase
     {
         $rhymes = (new Word('violet'))->halfRhymes();
 
-        $expected = ['cyclist', 'finalist', 'hybridised', 'iodised', 'ionised', 'lionised',
-                    'motorcyclist', 'nihilist', 'piloted', 'pirated', 'playacted', 'revivalist',
-                    'rioted', 'scientist', 'semifinalist', 'survivalist', ];
+        $expected = $this->convertObjectValueToString($rhymes);
 
         $this->assertEquals($expected, $rhymes);
     }
@@ -54,61 +61,43 @@ final class WordTest extends TestCase
     public function testOffensive1()
     {
         $offensive = (new Word('fuck'))->offensive();
-        $expected = true;
 
-        $this->assertEquals($expected, $offensive);
+        $this->assertTrue($offensive);
     }
 
     public function testOffensive2()
     {
         $offensive = (new Word('crap'))->offensive();
-        $expected = true;
 
-        $this->assertEquals($expected, $offensive);
+        $this->assertTrue($offensive);
     }
 
     public function testOffensive3()
     {
         $offensive = (new Word('shit'))->offensive();
-        $expected = true;
 
-        $this->assertEquals($expected, $offensive);
+        $this->assertTrue($offensive);
     }
 
     public function testOffensive4()
     {
         $offensive = (new Word('shitty'))->offensive();
-        $expected = true;
 
-        $this->assertEquals($expected, $offensive);
+        $this->assertTrue($offensive);
     }
 
     public function testNotOffensive()
     {
         $offensive = (new Word('cake'))->offensive();
-        $expected = false;
 
-        $this->assertEquals($expected, $offensive);
+        $this->assertFalse($offensive);
     }
 
     public function testPortmanteaus1()
     {
         $portmanteaus = (new Word('computer'))->portmanteaus();
 
-        $expected = ['computarena', 'computarise', 'computarisen', 'computarises', 'computarising', 'computaristocratic', 'computaroma',
-                    'computarose', 'computaround', 'computarousal', 'computarouse', 'computaroused', 'computarousing', 'computarrange',
-                    'computarranged', 'computarrangement', 'computarrangements', 'computarranging', 'computarray', 'computarrears', 'computarrest',
-                    'computarrested', 'computarresting', 'computarrests', 'computarrhythmias', 'computarrival', 'computarrivals', 'computarrive',
-                    'computarrived', 'computarrives', 'computarriving', 'computerena', 'computeriginal', 'computeriginality', 'computeriginally',
-                    'computeriginals', 'computeriginate', 'computeriginated', 'computeriginates', 'computeriginating', 'computerine', 'computerise',
-                    'computerisen', 'computerises', 'computerising', 'computeristocratic', 'computermination', 'computeroma', 'computerose',
-                    'computeround', 'computerousal', 'computerouse', 'computeroused', 'computerousing', 'computerrain', 'computerrestrial',
-                    'computerrific', 'computerrrange', 'computerrranged', 'computerrrangement', 'computerrrangements', 'computerrranging',
-                    'computerrray', 'computerrrears', 'computerrrest', 'computerrrested', 'computerrresting', 'computerrrests', 'computerrrhythmias',
-                    'computerrrival', 'computerrrivals', 'computerrrive', 'computerrrived', 'computerrrives', 'computerrriving', 'computerus',
-                    'computeryrannical', 'computoriginal', 'computoriginality', 'computoriginally', 'computoriginals', 'computoriginate',
-                    'computoriginated', 'computoriginates', 'computoriginating', 'computyrannical', 'incomputer', 'outcomputer', 'silicaomputer',
-                    'silicomputer', 'welcomputer', ];
+        $expected = $this->convertObjectValueToString($portmanteaus);
 
         $this->assertEquals($expected, $portmanteaus);
     }
@@ -117,8 +106,7 @@ final class WordTest extends TestCase
     {
         $portmanteaus = (new Word('cheese'))->portmanteaus();
 
-        $expected = ['chease', 'cheased', 'cheasel', 'cheasement', 'cheasements', 'cheases', 'cheasier', 'cheasiest', 'cheasily', 'cheasing',
-                    'cheasy', 'cheasygoing', 'chies', 'chiheese', 'chiis', 'chization', 'chys', ];
+        $expected = $this->convertObjectValueToString($portmanteaus);
 
         $this->assertEquals($expected, $portmanteaus);
     }
