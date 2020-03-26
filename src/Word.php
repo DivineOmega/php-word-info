@@ -3,14 +3,14 @@
 namespace DivineOmega\WordInfo;
 
 use DaveChild\TextStatistics\Syllables;
-use rapidweb\RWFileCache\RWFileCache;
+use DivineOmega\DOFileCache\DOFileCache;
 
 class Word
 {
     /** @var string|null */
     private $word;
 
-    /** @var RWFileCache|null */
+    /** @var DOFileCache|null */
     private $cache;
 
     /**
@@ -43,7 +43,7 @@ class Word
      */
     private function setupCache()
     {
-        $this->cache = new RWFileCache();
+        $this->cache = new DOFileCache();
         $this->cache->changeConfig(['cacheDirectory' => '/tmp/php-word-info-cache/']);
     }
 
@@ -164,7 +164,7 @@ class Word
 
         foreach ($responseItems as $responseItem) {
             $responseItemPortmanteaus = array_map(function ($portmanteauString) {
-                return new Word($portmanteauString);
+                return new self($portmanteauString);
             }, explode(',', $responseItem->combined));
 
             $portmanteaus = array_merge($portmanteaus, $responseItemPortmanteaus);
