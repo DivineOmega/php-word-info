@@ -4,7 +4,7 @@
     "type": "library",
     "require": {
         "php": "^7.0",
-        "rapidwebltd/rw-file-cache": "^1.2",
+        "divineomega/do-file-cache": "^2.0",
         "divineomega/is_offensive": "^1.0",
         "davechild/textstatistics": "^1.0",
         "doctrine/inflector": "^1.2"
